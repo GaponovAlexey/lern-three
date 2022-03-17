@@ -3,21 +3,24 @@ import type { NextPage } from 'next'
 import { Suspense, useRef, useState } from 'react'
 // import * as THREE from "three";
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
-import { use } from '@react-three/cannon'
+import { Physics, useBox, usePlane } from '@react-three/cannon'
 
 const Home: NextPage = () => {
   return (
     <div className='h-screen'>
       <Suspense fallback={null}>
         <Canvas>
-          {/* свет  */}
-          <ambientLight intensity={0.1} />
-          {/* направленый свет */}
-          <pointLight position={[10, 1, 10]} />
-          <Box position={[-5, 0, -20]} />
-          <Box position={[0, 0, -20]} />
-          <Box position={[5, 0, -20]} />
-          <Floor position={[0, -4, -3]} />
+          <Physics>
+            {/* свет  */}
+            <ambientLight intensity={0.1} />
+            {/* направленый свет */}
+            <pointLight position={[10, 1, 10]} />
+            <Box position={[-5, 0, -20]} />
+            <Box position={[0, 0, -20]} />
+            <Box position={[5, 0, -20]} />
+            <Box position={[5, 0, -20]} />
+            <Floor />
+          </Physics>
         </Canvas>
       </Suspense>
     </div>
@@ -32,7 +35,10 @@ function Box(props) {
     'img/5.jpg',
   ])
 
-  const ref = useRef()
+  const [ref] = useBox(() => ({
+    position: [0,5,0],
+    mass: 1
+  }))
   const [hovered, hover] = useState(false)
   const [clicked, click] = useState(false)
   // useFrame(() => (ref.current.rotation.x += 0.01))
@@ -40,7 +46,7 @@ function Box(props) {
   return (
     <mesh
       {...props}
-      // ref={ref}
+      ref={ref}
       scale={clicked ? 5 : 1}
       onClick={(event) => click(!clicked)}
       onPointerOver={(event) => hover(true)}
@@ -53,10 +59,14 @@ function Box(props) {
 }
 
 const Floor = (props) => {
+  const [ref] = usePlane(() => ({
+    rotation: [-Math.PI / 2, 0, 0],
+    position: [0, -2, -1],
+  }))
   const [create] = useLoader(TextureLoader, ['img/1.jpg'])
   return (
-    <mesh {...props}>
-      <planeGeometry args={[12, 1]} />
+    <mesh ref={ref} {...props}>
+      <planeGeometry args={[10, 10]} />
       <meshStandardMaterial map={create} />
     </mesh>
   )
