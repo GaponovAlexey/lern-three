@@ -4,7 +4,7 @@ import { Suspense, useRef, useState } from 'react'
 // import * as THREE from "three";
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { Physics, useBox, usePlane } from '@react-three/cannon'
-
+import Model from '../components/Models/myModel'
 const One = () => {
   return (
     <div>
@@ -17,6 +17,7 @@ const One = () => {
               <Box position={[5, 0, 3]} />
               <Box position={[5, 1, 1]} />
               <Box position={[5, 2, 2]} />
+              <Model />
               <Floor />
             </Physics>
           </Canvas>
