@@ -11,9 +11,11 @@
   "dependencies": {
     "@react-three/cannon": "^5.0.1",
     "@react-three/fiber": "^7.0.26",
+    "cass": "^0.0.5",
     "next": "^12.1.0",
     "react": "^18.0.0-rc.2",
     "react-dom": "^18.0.0-rc.2",
+    "sass": "^1.49.9",
     "three": "^0.138.3"
   },
   "devDependencies": {
