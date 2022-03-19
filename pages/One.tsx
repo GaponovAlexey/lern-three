@@ -4,22 +4,22 @@ import { Suspense, useRef, useState } from 'react'
 // import * as THREE from "three";
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { Physics, useBox, usePlane } from '@react-three/cannon'
-import Model from '../components/Models/myModel'
+import Model from '../components/Models/model/Scene'
+import { OrbitControls } from '@react-three/drei'
 const One = () => {
   return (
     <div>
       <div className='h-screen'>
         <Suspense fallback={null}>
           <Canvas>
-            <Physics>
-              <ambientLight intensity={0.1} />
-              <pointLight position={[10, 10, 10]} />
-              <Box position={[5, 0, 3]} />
-              <Box position={[5, 1, 1]} />
-              <Box position={[5, 2, 2]} />
-              <Model />
-              <Floor />
-            </Physics>
+            <OrbitControls />
+            {/* <Physics> */}
+            <ambientLight intensity={1} />
+            <pointLight position={[0, 0, 0]} />
+            <Box position={[5, 0, 3]} />
+            <Model position={[0, 0, 0]} />
+            {/* <Floor /> */}
+            {/* </Physics> */}
           </Canvas>
         </Suspense>
       </div>
