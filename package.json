@@ -10,11 +10,7 @@
   },
   "dependencies": {
     "@react-three/cannon": "^5.0.1",
-<<<<<<< HEAD
     "@react-three/drei": "^8.18.5",
-=======
-    "@react-three/drei": "^8.16.7",
->>>>>>> 3bfedffc03526fef4c1483e032be9522b2dc43b3
     "@react-three/fiber": "^7.0.26",
     "@react-three/gltfjsx": "^4.3.4",
     "cass": "^0.0.5",

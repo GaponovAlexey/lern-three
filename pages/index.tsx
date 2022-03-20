@@ -4,6 +4,7 @@ import { Suspense, useRef, useState } from 'react'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { Physics, useBox, usePlane } from '@react-three/cannon'
 import { OrbitControls, PerspectiveCamera, useGLTF } from '@react-three/drei'
+import { Canvas, useLoader } from '@react-three/fiber'
 
 const MyModel = ({ ...props }) => {
   const group = useRef()
@@ -42,7 +43,7 @@ const Home: NextPage = () => {
   return (
     <div className='h-screen'>
       <Suspense fallback={null}>
-        <Canvas>
+        <Canvas >
           <OrbitControls />
           <Physics>
             <ambientLight intensity={0.1} />
