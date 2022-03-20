@@ -4,53 +4,55 @@ import { Suspense, useRef, useState } from 'react'
 // import * as THREE from "three";
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { Physics, useBox, usePlane } from '@react-three/cannon'
+import { OrbitControls, PerspectiveCamera, useGLTF } from '@react-three/drei'
+
+const MyModel = ({ ...props }) => {
+  const group = useRef()
+  const { nodes, materials } = useGLTF('model/guard/scene.gltf')
+  return (
+    <group ref={group} {...props} dispose={null}>
+      <group rotation={[-Math.PI / 2, 0, 0]}>
+        <group
+          position={[-7.34, 0.52, 5.11]}
+          rotation={[0.72, -1.1, -1.93]}
+          scale={0.1}
+        >
+          <mesh
+            geometry={nodes.Plane_0.geometry}
+            material={materials.Plane_0}
+          />
+        </group>
+        <group position={[-1.56, -0.12, 3.06]}>
+          <mesh
+            geometry={nodes.Cylinder000_0.geometry}
+            material={materials.wapen}
+          />
+        </group>
+        <group position={[0.03, 0.74, 2.94]}>
+          <mesh
+            geometry={nodes.Avatar001_0.geometry}
+            material={materials.personage}
+          />
+        </group>
+      </group>
+    </group>
+  )
+}
 
 const Home: NextPage = () => {
   return (
     <div className='h-screen'>
       <Suspense fallback={null}>
         <Canvas>
+          <OrbitControls />
           <Physics>
-            {/* свет  */}
             <ambientLight intensity={0.1} />
-            {/* направленый свет */}
-            <pointLight position={[10, 10, 10]} />
-            <Box position={[5, 0, 3]} />
-            <Box position={[5, 1, 1]} />
-            <Box position={[5, 2, 2]} />
+            <MyModel />
             <Floor />
           </Physics>
         </Canvas>
       </Suspense>
     </div>
-  )
-}
-
-function Box(props) {
-  // const [create] = useLoader(TextureLoader, ["../public/img/1.jpg"])
-  const [create, two, three] = useLoader(TextureLoader, [
-    'img/1.jpg',
-    'img/2.jpg',
-    'img/5.jpg',
-  ])
-
-  const [ref] = useBox(() => ({
-    position: [0, 2, 0],
-    mass: 2,
-  }))
-  const [clicked, click] = useState(false)
-  // useFrame(() => (ref.current.rotation.x += 0.01))
-
-  return (
-    <mesh
-      {...props}
-      ref={ref}
-      scale={clicked ? 5 : 1}
-      onClick={(event) => click(!clicked)}
-    >
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial map={three} />
-    </mesh>
   )
 }
 
