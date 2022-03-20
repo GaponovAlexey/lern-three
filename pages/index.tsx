@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-<<<<<<< HEAD
 import { Suspense, useRef, useState } from 'react'
 // import * as THREE from "three";
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
@@ -52,22 +51,10 @@ const Home: NextPage = () => {
           </Physics>
         </Canvas>
       </Suspense>
-=======
-
-import CanMain from '../components/Canvas/CanMain'
-import One from './One'
-
-const Home: NextPage = () => {
-  return (
-    <div>
-      <div className='fixed top-[50%] left-[40%]'>hi</div>
-      <One />
->>>>>>> 3bfedffc03526fef4c1483e032be9522b2dc43b3
     </div>
   )
 }
 
-<<<<<<< HEAD
 const Floor = (props) => {
   const [ref] = usePlane(() => ({
     rotation: [-Math.PI / 2, 0, 0],
@@ -82,6 +69,4 @@ const Floor = (props) => {
   )
 }
 
-=======
->>>>>>> 3bfedffc03526fef4c1483e032be9522b2dc43b3
 export default Home
